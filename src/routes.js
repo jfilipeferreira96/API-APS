@@ -3,7 +3,7 @@ const routes = Router();
 const Controller = require("./Controllers/ActivityController");
 
 routes.get("/", (req, res) => {
-  return res.status(200).json({ message: "Server is online" });
+  res.sendFile("Views/home_page.html", { root: __dirname });
 });
 
 //1. Página de configuração de uma atividade
