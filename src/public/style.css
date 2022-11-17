@@ -8,3 +8,36 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.sect3 h2 {
+  color: rgb(167 48 65);
+  font-size: 2rem;
+}
+
+.sect3 h1 {
+  font-size: 2.5rem;
+  color: #09253e;
+}
+
+.sect3 {
+  background-color: rgb(206, 217, 226);
+  width: 100%;
+  height: 100vh;
+}
+
+.text-center {
+  text-align: center !important;
+}
+.pb-5 {
+  padding-bottom: 3rem !important;
+}
+
+.pt-5 {
+  padding-top: 3rem !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+}
