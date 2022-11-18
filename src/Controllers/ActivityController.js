@@ -7,7 +7,13 @@ class ActivityController {
 
     //Implementar busca na BD que devolve os parametros da atividade com id xxxx
 
-    const sendTestParams = [{ name: "title", type: "text/plain" }];
+    const sendTestParams = [
+      { name: "title", type: "text/plain" },
+      { name: "summary", type: "text/plain" },
+      { name: "documentation", type: "array" },
+      { name: "correctAnswer", type: "array" },
+      { name: "tipInfo", type: "text/plain" },
+    ];
 
     return res.status(200).json(sendTestParams);
   }
@@ -39,12 +45,15 @@ class ActivityController {
 
     const sendTestAnalytics = [
       {
-        analytic1: "Setting 1",
-        type: "text/plain",
-      },
-      {
-        analytic2: "Setting 1",
-        type: "text/plain",
+        name: "invenriaStdID",
+        type: "integer",
+        analytics: [
+          { name: "title", type: "text/plain" },
+          { name: "numOfResets", type: "integer" },
+          { name: "numOfSubmits", type: "integer" },
+          { name: "wasInformationClicked", type: "boolean" },
+          { name: "answer", type: "array" },
+        ],
       },
     ];
 
