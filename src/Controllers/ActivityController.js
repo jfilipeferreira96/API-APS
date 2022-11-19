@@ -18,24 +18,6 @@ class ActivityController {
     return res.status(200).json(sendTestParams);
   }
 
-  //3. Deploy de atividade
-  //− user_url: URL para um Web service que permite efetuar o deploy da atividade, recebendo como parâmetro uma identificação da instância na Inven!RA;
-  async GetActivityPage(req, res) {
-    const { activityID, inveniraStdID, json_params } = req.body;
-
-    //devo armazenar o id da atividade na bd
-    //não deve enviar a pagina mas sim um url com a pagina!
-    let indexPath = path.join(__dirname, "../Views/activity_page.html");
-    return res.sendFile(indexPath);
-  }
-
-  async SendActivityPageURL(req, res) {
-    const { activityID, inveniraStdID, json_params } = req.body;
-
-    const data = { deployURL: `https://api-aps.herokuapp.com/${activityID}/${inveniraStdID}` };
-    res.json(data);
-  }
-
   //2. Lista de analytics da atividade
   // analytics_list_url: URL para um Web service que devolve a lista de analytics que o Activity Provider recolherá
   async GetAnalytics(req, res) {
@@ -58,6 +40,24 @@ class ActivityController {
     ];
 
     return res.status(200).json(sendTestAnalytics);
+  }
+
+  //3.GET Deploy de atividade
+  //− user_url: URL para um Web service que permite efetuar o deploy da atividade, recebendo como parâmetro uma identificação da instância na Inven!RA;
+  async GetActivityPage(req, res) {
+    const { activityID, inveniraStdID, json_params } = req.body;
+
+    //devo armazenar o id da atividade na bd
+    //não deve enviar a pagina mas sim um url com a pagina!
+    let indexPath = path.join(__dirname, "../Views/activity_page.html");
+    return res.sendFile(indexPath);
+  }
+  //3.POST
+  async SendActivityPageURL(req, res) {
+    const { activityID, inveniraStdID, json_params } = req.body;
+
+    const data = { deployURL: `https://api-aps.herokuapp.com/${activityID}/${inveniraStdID}` };
+    res.json(data);
   }
 
   //4. Analytics de atividade

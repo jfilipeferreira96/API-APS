@@ -13,14 +13,17 @@ routes.get("/activity-config.html", (req, res) => {
   res.sendFile("Views/config_page.html", { root: __dirname });
 });
 
-routes.get("/activity-params", Controller.SendParams);
+//1.
+routes.get("/json_params_url", Controller.SendParams);
+
+//2
+routes.get("/analytics", Controller.GetAnalytics);
 
 //3
 routes.post("/activity-page", Controller.SendActivityPageURL);
 routes.get("/activity-page/:activityID/:inverniraStdID", Controller.GetActivityPage);
 
-routes.post("/analytics", Controller.GetActivityAnalytics);
-
-routes.get("/analytics/:activityID", Controller.GetAnalytics);
+//4
+routes.post("/analytics/:activityID", Controller.GetActivityAnalytics);
 
 module.exports = routes;
