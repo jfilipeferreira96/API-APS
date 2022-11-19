@@ -68,10 +68,22 @@ class ActivityController {
       {
         activityID: activityID,
         inveniraStdID: 1001,
+        analytics: [
+          { numOfResets: "numOfResets", value: 2 },
+          { name: "numOfSubmits", value: 3 },
+          { name: "wasInformationClicked", value: true },
+          { name: "answer", type: ["align:left"] },
+        ],
       },
       {
         activityID: activityID,
         inveniraStdID: 1002,
+        analytics: [
+          { numOfResets: "numOfResets", value: 0 },
+          { name: "numOfSubmits", value: 1 },
+          { name: "wasInformationClicked", value: false },
+          { name: "answer", type: ["color:blue"] },
+        ],
       },
     ];
 
