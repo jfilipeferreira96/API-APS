@@ -27,6 +27,6 @@ routes.get("/deploy-activity/:activityID", Controller.DeployActivityPost);
 routes.post("/analytics", Controller.GetActivityAnalytics);
 
 //Acesso do aluno a uma página de actividade apos o deploy!
-routes.get("/:activityID/:inveniraStdID", Controller.GetActivityPage);
+routes.get("/:activityID/:inveniraStdID?", Controller.GetActivityPage);
 
 module.exports = routes;
