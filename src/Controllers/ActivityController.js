@@ -41,8 +41,6 @@ class ActivityController {
     return res.status(200).json(sendTestAnalytics);
   }
 
-  //3.GET Deploy de atividade
-  //− user_url: URL para um Web service que permite efetuar o deploy da atividade, recebendo como parâmetro uma identificação da instância na Inven!RA;
   async GetActivityPage(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
 
@@ -51,6 +49,12 @@ class ActivityController {
     let indexPath = path.join(__dirname, "../Views/activity_page.html");
     return res.sendFile(indexPath);
   }
+
+  //3.GET Deploy de atividade
+  async DeployActivity(req, res) {
+    //fazemos deploy desta atividade
+  }
+
   //3.POST
   async SendActivityPageURL(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;

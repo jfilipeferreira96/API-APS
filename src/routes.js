@@ -20,10 +20,13 @@ routes.get("/json_params_url", Controller.SendParams);
 routes.get("/analytics_list", Controller.GetAnalytics);
 
 //3
-routes.post("/activity-page", Controller.SendActivityPageURL);
-routes.get("/activity-page/:activityID/:inverniraStdID", Controller.GetActivityPage);
+routes.post("/deploy-activity", Controller.SendActivityPageURL);
+routes.get("/deploy-activity", Controller.DeployActivity);
 
 //4
 routes.post("/analytics", Controller.GetActivityAnalytics);
+
+//Acesso do aluno a uma página de actividade apos o deploy!
+routes.get("/:activityID/:inveniraStdID", Controller.GetActivityPage);
 
 module.exports = routes;
