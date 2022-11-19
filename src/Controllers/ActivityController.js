@@ -51,15 +51,33 @@ class ActivityController {
   }
 
   //3.GET Deploy de atividade
-  async DeployActivity(req, res) {
-    //fazemos deploy desta atividade
+  async DeployActivityGet(req, res) {
+    const { activityID } = req.params;
+    let data = { message: `It's required an activity id.` };
+    let responseCode = 400;
+
+    if (activityID) {
+      data = { deployURL: `https://api-aps.herokuapp.com/${activityID}` };
+      responseCode = 200;
+    }
+
+    res.status(responseCode).json(data);
   }
 
   //3.POST
-  async SendActivityPageURL(req, res) {
+  async DeployActivityPost(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
+    let data = { message: `It's required an activity id.` };
+    let responseCode = 400;
 
-    const data = { deployURL: `https://api-aps.herokuapp.com/${activityID}/${inveniraStdID}` };
+    if (req.params.activityID !== activityID) {
+      data = { message: `Activity ID does not match` };
+    }
+
+    if (activityID && activityID == req.params.activityID) {
+      data = { deployURL: `https://api-aps.herokuapp.com/${activityID}/${inveniraStdID}` };
+      responseCode = 200;
+    }
     res.json(data);
   }
 

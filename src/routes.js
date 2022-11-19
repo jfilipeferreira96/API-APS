@@ -20,8 +20,8 @@ routes.get("/json_params_url", Controller.SendParams);
 routes.get("/analytics_list", Controller.GetAnalytics);
 
 //3
-routes.post("/deploy-activity", Controller.SendActivityPageURL);
-routes.get("/deploy-activity", Controller.DeployActivity);
+routes.post("/deploy-activity/:activityID", Controller.DeployActivityGet);
+routes.get("/deploy-activity/:activityID", Controller.DeployActivityPost);
 
 //4
 routes.post("/analytics", Controller.GetActivityAnalytics);
