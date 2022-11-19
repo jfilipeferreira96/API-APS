@@ -17,13 +17,13 @@ routes.get("/activity-config.html", (req, res) => {
 routes.get("/json_params_url", Controller.SendParams);
 
 //2
-routes.get("/analytics", Controller.GetAnalytics);
+routes.get("/analytics_list", Controller.GetAnalytics);
 
 //3
 routes.post("/activity-page", Controller.SendActivityPageURL);
 routes.get("/activity-page/:activityID/:inverniraStdID", Controller.GetActivityPage);
 
 //4
-routes.post("/analytics/:activityID", Controller.GetActivityAnalytics);
+routes.post("/analytics", Controller.GetActivityAnalytics);
 
 module.exports = routes;

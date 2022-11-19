@@ -27,10 +27,9 @@ class ActivityController {
 
     const sendTestAnalytics = [
       {
-        name: "invenriaStdID",
+        name: "inveniraStdID",
         type: "integer",
         analytics: [
-          { name: "title", type: "text/plain" },
           { name: "numOfResets", type: "integer" },
           { name: "numOfSubmits", type: "integer" },
           { name: "wasInformationClicked", type: "boolean" },
