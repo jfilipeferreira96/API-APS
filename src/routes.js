@@ -23,7 +23,7 @@ routes.get("/analytics_list", Controller.GetAnalytics);
 routes.get("/deploy_activity/:activityID", Controller.DeployActivityGet);
 //devolve o seguinte link:
 //3.2
-routes.post("activity/:activityID", Controller.DeployActivityPost);
+routes.post("/activity/:activityID", Controller.DeployActivityPost);
 
 routes.get("/activity/:activityID/:inveniraStdID", Controller.GetActivityPage);
 

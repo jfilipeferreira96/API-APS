@@ -48,7 +48,7 @@ class ActivityController {
     let responseCode = 400;
 
     if (activityID) {
-      data = { deployURL: `https://api-aps.herokuapp.com/activity/${activityID}` };
+      data = { deployURL: `https://${req.headers.host}/activity/${activityID}` };
       responseCode = 200;
     }
 
@@ -68,7 +68,7 @@ class ActivityController {
       return res.status(400).json({ message: "Invalid json_params." });
     }
 
-    res.status(responseCode).json({ deployURL: `https://api-aps.herokuapp.com/activity/${activityID}/${inveniraStdID}` });
+    res.status(responseCode).json({ deployURL: `https://${req.headers.host}/activity/${activityID}/${inveniraStdID}` });
   }
 
   async GetActivityPage(req, res) {

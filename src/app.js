@@ -2,9 +2,12 @@ const express = require("express");
 const routes = require("./routes");
 const app = express();
 const path = require("path");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
