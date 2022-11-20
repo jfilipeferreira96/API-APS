@@ -72,7 +72,13 @@ class ActivityController {
   }
 
   async GetActivityPage(req, res) {
-    const { activityID, inveniraStdID, json_params } = req.body;
+    const { activityID, inveniraStdID } = req.params;
+    if (!activityID) {
+      return res.status(400).json({ message: "Invalid activity ID." });
+    }
+    if (!inveniraStdID) {
+      return res.status(400).json({ message: "Invalid student ID." });
+    }
 
     let indexPath = path.join(__dirname, "../Views/activity_page.html");
     return res.sendFile(indexPath);

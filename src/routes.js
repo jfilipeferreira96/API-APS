@@ -20,12 +20,13 @@ routes.get("/json_params_url", Controller.SendParams);
 routes.get("/analytics_list", Controller.GetAnalytics);
 
 //3.1
-routes.get("/deploy_activity/:activityID", Controller.DeployActivityGet);
+routes.get("/deploy_activity/:activityID?", Controller.DeployActivityGet);
 //devolve o seguinte link:
 //3.2
 routes.post("/activity/:activityID", Controller.DeployActivityPost);
 
-routes.get("/activity/:activityID/:inveniraStdID", Controller.GetActivityPage);
+//acede á pagina
+routes.get("/activity/:activityID?/:inveniraStdID?", Controller.GetActivityPage);
 
 //4
 routes.post("/analytics", Controller.GetActivityAnalytics);
