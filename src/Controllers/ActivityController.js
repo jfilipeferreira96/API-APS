@@ -41,15 +41,6 @@ class ActivityController {
     return res.status(200).json(sendTestAnalytics);
   }
 
-  async GetActivityPage(req, res) {
-    const { activityID, inveniraStdID, json_params } = req.body;
-
-    //devo armazenar o id da atividade na bd
-    //não deve enviar a pagina mas sim um url com a pagina!
-    let indexPath = path.join(__dirname, "../Views/activity_page.html");
-    return res.sendFile(indexPath);
-  }
-
   //3.GET Deploy de atividade
   async DeployActivityGet(req, res) {
     const { activityID } = req.params;
@@ -57,28 +48,34 @@ class ActivityController {
     let responseCode = 400;
 
     if (activityID) {
-      data = { deployURL: `https://api-aps.herokuapp.com/${activityID}` };
+      data = { deployURL: `https://api-aps.herokuapp.com/activity/${activityID}` };
       responseCode = 200;
     }
 
     res.status(responseCode).json(data);
   }
 
-  //3.POST
   async DeployActivityPost(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
-    let data = { message: `It's required an activity id.` };
-    let responseCode = 400;
-
-    if (req.params.activityID !== activityID) {
-      data = { message: `Activity ID does not match` };
+    console.log(req.body);
+    if (!activityID) {
+      return res.status(400).json({ message: "Invalid activity ID." });
+    }
+    if (!inveniraStdID) {
+      return res.status(400).json({ message: "Invalid student ID." });
+    }
+    if (!json_params) {
+      return res.status(400).json({ message: "Invalid json_params." });
     }
 
-    if (activityID && activityID == req.params.activityID) {
-      data = { deployURL: `https://api-aps.herokuapp.com/${activityID}/${inveniraStdID}` };
-      responseCode = 200;
-    }
-    res.json(data);
+    res.status(responseCode).json({ deployURL: `https://api-aps.herokuapp.com/activity/${activityID}/${inveniraStdID}` });
+  }
+
+  async GetActivityPage(req, res) {
+    const { activityID, inveniraStdID, json_params } = req.body;
+
+    let indexPath = path.join(__dirname, "../Views/activity_page.html");
+    return res.sendFile(indexPath);
   }
 
   //4. Analytics de atividade

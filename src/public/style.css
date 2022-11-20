@@ -39,5 +39,21 @@ code {
 img {
   max-width: 100%;
   height: auto;
-  max-height: 400px;
+  max-height: 250px;
+}
+
+.json {
+  text-align: left !important;
+  margin: 0 auto;
+  text-align: left;
+  width: 700px;
+}
+.green {
+  color: #007700;
+}
+.blue {
+  color: blue;
+}
+pre a {
+  color: blue;
 }
