@@ -8,6 +8,7 @@ Logger.setConfig({
     dateFormat: new Date().toLocaleString()
 });
 
-DB.StartDB(); ///starts database
+//starts database
+DB.StartDB(); 
 
 app.listen(port, () => Logger.info(`Server is running on Port ${port}`));
