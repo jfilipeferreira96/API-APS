@@ -57,7 +57,7 @@ class ActivityController {
 
   async DeployActivityPost(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
-    console.log(req.body);
+    
     if (!activityID) {
       return res.status(400).json({ message: "Invalid activity ID." });
     }
