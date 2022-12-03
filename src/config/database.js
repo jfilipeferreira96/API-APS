@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-const logger = require("../utils/logger");
+const Logger = require("../utils/logger");
 
 class DB {
   StartDB() {
@@ -12,7 +12,7 @@ class DB {
 
     this.pool.getConnection((err, conn) => {
       if (err) Logger.error(err);
-      logger.info("MySQL connection successful");
+      Logger.info("MySQL connection successful");
     });
   }
 
