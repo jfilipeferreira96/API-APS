@@ -10,4 +10,4 @@ Logger.setConfig({
 
 DB.StartDB(); //liga a DB e utiliza singleton
 
-app.listen(port, () => Logger.info(`Server is running on Port ${port}`));
+app.listen(port, () => console.log(`Server is running on Port ${port}`));
