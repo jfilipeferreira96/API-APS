@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const routes = Router();
-const Controller = require("./Controllers/ActivityController");
+const Activity = require("./Controllers/Activity");
+const Analytics = require("./Controllers/Analytics");
 
 routes.get("/", (req, res) => {
   res.sendFile("Views/home_page.html", { root: __dirname });
@@ -14,21 +15,21 @@ routes.get("/activity_config.html", (req, res) => {
 });
 
 //1.
-routes.get("/json_params_url", Controller.SendParams);
+routes.get("/json_params_url", Activity.SendParams);
 
 //2
-routes.get("/analytics_list", Controller.GetAnalytics);
+routes.get("/analytics_list", Activity.GetAnalytics);
 
 //3.1
-routes.get("/deploy_activity/:activityID?", Controller.DeployActivityGet);
+routes.get("/deploy_activity/:activityID?", Activity.DeployActivityGet);
 //devolve o seguinte link:
 //3.2
-routes.post("/activity/:activityID", Controller.DeployActivityPost);
+routes.post("/activity/:activityID", Activity.DeployActivityPost);
 
 //acede á pagina
-routes.get("/activity/:activityID?/:inveniraStdID?", Controller.GetActivityPage);
+routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
-routes.post("/analytics", Controller.GetActivityAnalytics);
+routes.post("/analytics", Analytics.request);
 
 module.exports = routes;
