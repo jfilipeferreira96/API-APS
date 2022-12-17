@@ -5,6 +5,10 @@ class AnalyticsController {
   //devolve analytics_url
   async GetActivityAnalytics(req, res) {
     const { activityID } = req.body;
+    let response = {
+      status: "Failed",
+      result: [],
+    };
 
     const sendTestAnalytics = [
       {
@@ -29,13 +33,20 @@ class AnalyticsController {
       },
     ];
 
-    return res.status(200).json(sendTestAnalytics);
+    response = {
+      status: "Success",
+      result: sendTestAnalytics,
+    };
+
+    return response;
   }
 }
 
 class AnalyticsProxy {
   constructor() {
     this.OriginalAnalyticsController = OriginalAnalyticsController;
+    this.cacheSuccessAccesses = 0;
+    this.previousAnalytics = [];
 
     //Fix to handle the 'this' keyword...
     Object.getOwnPropertyNames(AnalyticsProxy.prototype).forEach((key) => {
@@ -45,20 +56,32 @@ class AnalyticsProxy {
     });
   }
 
-  request(req, res) {
-    if (this.checkAccess()) {
-      this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
-      this.logAccess();
+  async FetchAnalytics(req, res) {
+    const { activityID } = req.body;
+
+    if (this.previousAnalytics.length > 0 && this.previousAnalytics[activityID]) {
+      //Caso a analitica da atividade esteja em cache, então não precisamos de fazer uma query na DB
+      Logger.info("Cached analytics");
+
+      return res.status(200).json(this.previousAnalytics[activityID]);
+    } else {
+      //se a analitica da Atividade não estiver em cache, então procuramos na DB
+      Logger.info("Fetching the DB for the Ativity Analytics");
+
+      const fetchDatabase = await this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
+      if (fetchDatabase.status == "Success") {
+        this.LogNumOfAccess();
+        this.previousAnalytics[activityID] = fetchDatabase.result;
+        return res.status(200).json(fetchDatabase.result);
+      } else {
+        return res.status(400);
+      }
     }
   }
 
-  checkAccess() {
-    Logger.proxy("Checking access prior to firing a real request.");
-    return true;
-  }
-
-  logAccess() {
-    Logger.proxy("Logging the time of request.");
+  LogNumOfAccess() {
+    this.cacheSuccessAccesses++;
+    Logger.proxy(`Number of successful accesses: ${this.cacheSuccessAccesses}`);
   }
 }
 

@@ -30,6 +30,6 @@ routes.post("/activity/:activityID", Activity.DeployActivityPost);
 routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
-routes.post("/analytics", Analytics.request);
+routes.post("/analytics", Analytics.FetchAnalytics);
 
 module.exports = routes;
