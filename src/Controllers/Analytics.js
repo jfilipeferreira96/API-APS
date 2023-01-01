@@ -45,7 +45,7 @@ class AnalyticsController {
 class AnalyticsProxy {
   constructor() {
     this.OriginalAnalyticsController = OriginalAnalyticsController;
-    this.cacheSuccessAccesses = 0;
+    this.cacheSuccessFetchs = 0;
     this.previousAnalytics = [];
 
     //Fix to handle the 'this' keyword...
@@ -70,7 +70,7 @@ class AnalyticsProxy {
 
       const fetchDatabase = await this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
       if (fetchDatabase.status == "Success") {
-        this.LogNumOfAccess();
+        this.LogNumOfDatabaseFetch();
         this.previousAnalytics[activityID] = fetchDatabase.result;
         return res.status(200).json(fetchDatabase.result);
       } else {
@@ -79,9 +79,9 @@ class AnalyticsProxy {
     }
   }
 
-  LogNumOfAccess() {
-    this.cacheSuccessAccesses++;
-    Logger.proxy(`Number of successful accesses: ${this.cacheSuccessAccesses}`);
+  LogNumOfDatabaseFetch() {
+    this.cacheSuccessFetchs++;
+    Logger.proxy(`Number of successful fetchs to the database: ${this.cacheSuccessFetchs}`);
   }
 }
 
