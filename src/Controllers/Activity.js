@@ -57,7 +57,7 @@ class ActivityController {
 
   async DeployActivityPost(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
-    
+
     if (!activityID) {
       return res.status(400).json({ message: "Invalid activity ID." });
     }
@@ -68,7 +68,7 @@ class ActivityController {
       return res.status(400).json({ message: "Invalid json_params." });
     }
 
-    res.status(responseCode).json({ deployURL: `https://${req.headers.host}/activity/${activityID}/${inveniraStdID}` });
+    res.status(200).json({ deployURL: `https://${req.headers.host}/activity/${activityID}/${inveniraStdID}` });
   }
 
   async GetActivityPage(req, res) {
