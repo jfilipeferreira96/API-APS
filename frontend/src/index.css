@@ -15,7 +15,7 @@ code {
 .App {
   text-align: center;
   background-color: #282c34;
-    min-height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,15 +57,57 @@ nav h1 {
 }
 
 .button{
-  background: #3D50A7!important;
-  margin-top: 15px!important;
+  background: #04AA6D;
+  margin: 15px 5px;
   border-radius: 0.875rem!important;
   border: none!important;
   font-family: Arial,serif!important;
   color: #ffffff!important;
-  background: #3D50A7!important;
   padding: 7px 10px!important;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.tipButton{
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 1rem 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+textarea {
+  width: 960px;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+@media only screen and (max-width: 1250px) {
+  textarea {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  textarea {
+    width: 300px;
+  }
+}
+
+.subtitle{
+
 }
