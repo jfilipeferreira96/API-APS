@@ -1,15 +1,12 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .App {
@@ -27,6 +24,11 @@ code {
 a {
   color: rgb(3, 196, 154);
 }
+
+p {
+  font-size: 20px;
+}
+
 img {
   max-width: 100%;
 }
@@ -51,26 +53,27 @@ nav h1 {
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
-.offers, .products {
+.offers,
+.products {
   display: flex;
   gap: 20px;
 }
 
-.button{
-  background: #04AA6D;
+.button {
+  background: #04aa6d;
   margin: 15px 5px;
-  border-radius: 0.875rem!important;
-  border: none!important;
-  font-family: Arial,serif!important;
-  color: #ffffff!important;
-  padding: 7px 10px!important;
+  border-radius: 0.875rem !important;
+  border: none !important;
+  font-family: Arial, serif !important;
+  color: #ffffff !important;
+  padding: 7px 10px !important;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.tipButton{
-  background-color: #04AA6D;
+.tipButton {
+  background-color: #04aa6d;
   border: none;
   color: white;
   padding: 10px;
@@ -108,6 +111,5 @@ textarea {
   }
 }
 
-.subtitle{
-
+.subtitle {
 }

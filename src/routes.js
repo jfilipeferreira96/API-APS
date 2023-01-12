@@ -2,6 +2,7 @@ const { Router } = require("express");
 const routes = Router();
 const Activity = require("./Controllers/Activity");
 const Analytics = require("./Controllers/Analytics");
+const FrontendController = require("./Controllers/FrontendController");
 
 routes.get("/", (req, res) => {
   res.sendFile("Views/home_page.html", { root: __dirname });
@@ -31,5 +32,8 @@ routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
 routes.post("/analytics", Analytics.FetchAnalytics);
+
+routes.get("/params/:activityID?/:inveniraStdID?", FrontendController.ActivityPageParams);
+routes.post("/analytics/:activityID?/:inveniraStdID?", FrontendController.SaveAnalytics);
 
 module.exports = routes;
