@@ -38,15 +38,15 @@ export default function Activity() {
     try {
       const paramsData = await fetch(`http://localhost:5000/params/${activityID}/${inveniraStdID}`);
       const response = await paramsData.json();
-
-      if (response) {
+      
+      if (response.status === 'Success') {
         setParams({
-          title: response[0].title,
-          summary: response[0].summary,
-          documentation: response[0].documentation,
-          correctAnswer: response[0].correctAnswer,
-          tipInfo: response[0].tipInfo,
-          imgUrl: response[0].imgUrl,
+          title: response.params[0].title,
+          summary: response.params[0].summary,
+          documentation: response.params[0].documentation,
+          correctAnswer: response.params[0].correctAnswer,
+          tipInfo: response.params[0].tipInfo,
+          imgUrl: response.params[0].imgUrl,
         });
       } else {
         navigate("/404");
@@ -95,8 +95,11 @@ export default function Activity() {
     if (params.correctAnswer === analytics.answer.trim().toLocaleLowerCase()) {
       //chama post
       postAnalytics(activityID, inveniraStdID);
-      alert("Sucess your anwser is correct");
+      alert("Success! Your anwser is correct!");
       //navigate("/");
+    } else
+    {
+      alert("Incorrect anwser, please try again.");
     }
   };
 
