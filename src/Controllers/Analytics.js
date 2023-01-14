@@ -1,5 +1,7 @@
 const Logger = require("../utils/logger");
 
+//Neste documento encontra-se o Design Pattern: Proxy
+
 class AnalyticsController {
   //4. Analytics de atividade
   //devolve analytics_url
