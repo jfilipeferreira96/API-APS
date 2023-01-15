@@ -28,7 +28,7 @@ class Subject {
   //da loop a todos os observers e notifica-os quando existiu uma alteraçao
   notifyAllObservers() {
     this.observers.forEach((observer) => {
-      observer.notify(this);
+      observer.update(this);
     });
   }
 }
@@ -37,7 +37,7 @@ class ConsoleObserver {
   constructor(name) {
     this.name = name;
   }
-  notify(model) {
+  update(model) {
     console.log(`${this.name} has been notified!`);
     Logger.info(`The student with the ID: ${model.inveniraStdID} has acessed the Activity: ${model.activityID}`);
   }
@@ -48,7 +48,7 @@ class InsertStudentObserver {
     this.name = name;
   }
 
-  async notify(model) {
+  async update(model) {
     console.log(`${this.name} has been notified!`);
 
     //insere uma row na tabela xxx com o numero de aluno, atividade e a data de entrada now()

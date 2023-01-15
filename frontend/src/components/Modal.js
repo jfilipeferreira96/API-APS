@@ -9,7 +9,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    minHeight: "600px",
+    minHeight: "200px",
     minWidth: "600px",
     textAlign: "center",
   },

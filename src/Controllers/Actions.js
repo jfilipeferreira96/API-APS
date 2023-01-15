@@ -13,8 +13,21 @@ class ActionsController {
       return res.status(400).json({ message: "Invalid student ID." });
     }
 
-    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${activityID}`);
+    //extra validaçao para verificar se este aluno já fez a atividade!
+    const checkStudent = await DB.Query(`SELECT * FROM student_analytics WHERE activityID = ${activityID} AND stdID = ${inveniraStdID}`);
+    if (checkStudent.length > 0) {
+      const id = checkStudent[0].id;
+      const numOfSubmits = checkStudent[0].numOfSubmits;
 
+      if (numOfSubmits == null) {
+        const deleteEntry = await DB.Query(`DELETE FROM student_analytics WHERE id=${id}`);
+      } else {
+        response = { status: "AlreadySubmited" };
+        return res.json(response);
+      }
+    }
+
+    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${activityID}`);
     if (params.length > 0) {
       response = { status: "Success", params: params };
 

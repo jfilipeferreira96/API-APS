@@ -62,7 +62,7 @@ nav h1 {
 .button {
   background: #04aa6d;
   margin: 15px 5px;
-  border-radius: 0.875rem !important;
+  border-radius: 8px !important;
   border: none !important;
   font-family: Arial, serif !important;
   color: #ffffff !important;

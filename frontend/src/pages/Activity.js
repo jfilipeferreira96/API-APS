@@ -38,8 +38,8 @@ export default function Activity() {
     try {
       const paramsData = await fetch(`http://localhost:5000/params/${activityID}/${inveniraStdID}`);
       const response = await paramsData.json();
-      
-      if (response.status === 'Success') {
+
+      if (response.status === "Success") {
         setParams({
           title: response.params[0].title,
           summary: response.params[0].summary,
@@ -48,6 +48,9 @@ export default function Activity() {
           tipInfo: response.params[0].tipInfo,
           imgUrl: response.params[0].imgUrl,
         });
+      } else if (response.status === "AlreadySubmited") {
+        alert("You have already submited an anwser.");
+        navigate("/");
       } else {
         navigate("/404");
       }
@@ -96,9 +99,8 @@ export default function Activity() {
       //chama post
       postAnalytics(activityID, inveniraStdID);
       alert("Success! Your anwser is correct!");
-      //navigate("/");
-    } else
-    {
+      navigate("/");
+    } else {
       alert("Incorrect anwser, please try again.");
     }
   };
