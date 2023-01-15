@@ -36,7 +36,15 @@ export default function Activity() {
 
   const fetchParams = async (activityID, inveniraStdID) => {
     try {
-      const paramsData = await fetch(`http://localhost:5000/params/${activityID}/${inveniraStdID}`);
+      let url = "";
+
+      if (process.env.NODE_ENV || process.env.NODE_ENV === "production") {
+        url = `https://api-aps.herokuapp.com/params/${activityID}/${inveniraStdID}`;
+      } else {
+        url = `http://localhost:5000/params/${activityID}/${inveniraStdID}`;
+      }
+
+      const paramsData = await fetch(url);
       const response = await paramsData.json();
 
       if (response.status === "Success") {
