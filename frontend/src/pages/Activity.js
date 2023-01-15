@@ -38,7 +38,7 @@ export default function Activity() {
     try {
       let url = "";
 
-      if (process.env.NODE_ENV || process.env.NODE_ENV === "production") {
+      if (process.env.NODE_ENV === "production") {
         url = `https://api-aps.herokuapp.com/params/${activityID}/${inveniraStdID}`;
       } else {
         url = `http://localhost:5000/params/${activityID}/${inveniraStdID}`;
