@@ -67,7 +67,7 @@ class ActivityController {
 
     //inserir dados do json params na bd para mais tarde o frontend utilizar estes dados
 
-    res.status(200).json({ deployURL: `https://${req.headers.host}/activity/${activityID}/${inveniraStdID}` });
+    res.status(200).json({ deployURL: `https://api-aps-jade.vercel.app/activity/${activityID}/${inveniraStdID}` });
   }
 
   async GetActivityPage(req, res) {
