@@ -82,37 +82,6 @@ class ActivityController {
     let indexPath = path.join(__dirname, "../Views/activity_page.html");
     return res.sendFile(indexPath);
   }
-
-  //4. Analytics de atividade
-  //devolve analytics_url
-  async GetActivityAnalytics(req, res) {
-    const { activityID } = req.body;
-
-    const sendTestAnalytics = [
-      {
-        activityID: activityID,
-        inveniraStdID: 1001,
-        analytics: [
-          { numOfResets: "numOfResets", value: 2 },
-          { name: "numOfSubmits", value: 3 },
-          { name: "wasInformationClicked", value: true },
-          { name: "answer", type: ["align:left"] },
-        ],
-      },
-      {
-        activityID: activityID,
-        inveniraStdID: 1002,
-        analytics: [
-          { numOfResets: "numOfResets", value: 0 },
-          { name: "numOfSubmits", value: 1 },
-          { name: "wasInformationClicked", value: false },
-          { name: "answer", type: ["color:blue"] },
-        ],
-      },
-    ];
-
-    return res.status(200).json(sendTestAnalytics);
-  }
 }
 
 module.exports = new ActivityController();
