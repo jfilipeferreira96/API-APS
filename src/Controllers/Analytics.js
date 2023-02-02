@@ -64,21 +64,20 @@ class AnalyticsProxy {
     if (this.previousAnalytics.length > 0 && this.previousAnalytics[activityID]) {
       //Caso a analitica da atividade esteja em cache, então não precisamos de fazer uma query na DB
       Logger.info("Cached analytics");
-
       return res.status(200).json(this.previousAnalytics[activityID]);
-    } else {
-      //se a analitica da Atividade não estiver em cache, então procuramos na DB
-      Logger.info("Fetching the DB for the Ativity Analytics");
-
-      const fetchDatabase = await this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
-      if (fetchDatabase.status == "Success") {
-        this.LogNumOfDatabaseFetch();
-        this.previousAnalytics[activityID] = fetchDatabase.result;
-        return res.status(200).json(fetchDatabase.result);
-      } else {
-        return res.status(400);
-      }
     }
+
+    //se a analitica da Atividade não estiver em cache, então procuramos na DB
+    Logger.info("Fetching the DB for the Ativity Analytics");
+
+    const fetchDatabase = await this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
+    if (fetchDatabase.status !== "Success") {
+      return res.status(400);
+    }
+
+    this.LogNumOfDatabaseFetch();
+    this.previousAnalytics[activityID] = fetchDatabase.result;
+    return res.status(200).json(fetchDatabase.result);
   }
 
   LogNumOfDatabaseFetch() {

@@ -2,7 +2,7 @@ const { Router } = require("express");
 const routes = Router();
 const Activity = require("./Controllers/Activity");
 const Analytics = require("./Controllers/Analytics");
-const Actions = require("./Controllers/Actions");
+const StudentActions = require("./Controllers/StudentActions");
 
 routes.get("/", (req, res) => {
   res.sendFile("Views/home_page.html", { root: __dirname });
@@ -23,7 +23,7 @@ routes.get("/analytics_list", Activity.GetAnalytics);
 
 //3.1
 routes.get("/deploy_activity/:activityID?", Activity.DeployActivityGet);
-//devolve o seguinte link:
+
 //3.2
 routes.post("/activity/:activityID", Activity.DeployActivityPost);
 
@@ -33,7 +33,8 @@ routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 //4
 routes.post("/analytics", Analytics.FetchAnalytics);
 
-routes.get("/params/:activityID?/:inveniraStdID?", Actions.ActivityPageParams);
-routes.post("/analytics/:activityID?/:inveniraStdID?", Actions.SaveAnalytics);
+//Student interactions with the ActivityPage Routes
+routes.get("/params/:activityID?/:inveniraStdID?", StudentActions.ActivityPageParams);
+routes.post("/analytics/:activityID?/:inveniraStdID?", StudentActions.SaveAnalytics);
 
 module.exports = routes;
