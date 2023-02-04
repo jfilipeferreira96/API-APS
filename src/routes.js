@@ -23,11 +23,11 @@ routes.get("/analytics_list", Activity.GetAnalytics);
 
 //3.1
 routes.get("/deploy_activity/:activityID?", Activity.DeployActivityGet);
-//devolve o seguinte link:
+
 //3.2
 routes.post("/activity/:activityID", Activity.DeployActivityPost);
 
-//acede á pagina
+//acede à pagina da atividade
 routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
