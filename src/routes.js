@@ -27,7 +27,7 @@ routes.get("/deploy_activity/:activityID?", Activity.DeployActivityGet);
 //3.2
 routes.post("/activity/:activityID", Activity.DeployActivityPost);
 
-//acede á pagina
+//acede à pagina
 routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
