@@ -1,7 +1,11 @@
 const path = require("path");
+const root = path.resolve(__dirname, "..");
 
-class ActivityController {
-  //1.parâmetros respetivos
+class Activity {
+  async ActivityConfig(req, res) {
+    res.status(200).sendFile(path.join(root, "/Views/config_page.html"));
+  }
+
   async SendParams(req, res) {
     const sendTestParams = [
       { name: "title", type: "text/plain" },
@@ -15,28 +19,6 @@ class ActivityController {
     return res.status(200).json(sendTestParams);
   }
 
-  //2. Lista de analytics da atividade
-  // analytics_list_url: URL para um Web service que devolve a lista de analytics que o Activity Provider recolherá
-  async GetAnalytics(req, res) {
-    const activityID = req.params.activityID;
-
-    const sendTestAnalytics = [
-      {
-        name: "inveniraStdID",
-        type: "integer",
-        analytics: [
-          { name: "numOfResets", type: "integer" },
-          { name: "numOfSubmits", type: "integer" },
-          { name: "wasInformationClicked", type: "boolean" },
-          { name: "answer", type: "array" },
-        ],
-      },
-    ];
-
-    return res.status(200).json(sendTestAnalytics);
-  }
-
-  //3.GET Deploy de atividade
   async DeployActivityGet(req, res) {
     const { activityID } = req.params;
     let data = { message: `It's required an activity id.` };
@@ -52,7 +34,6 @@ class ActivityController {
 
   async DeployActivityPost(req, res) {
     const { activityID, inveniraStdID, json_params } = req.body;
-    console.log(activityID, inveniraStdID, json_params);
 
     //valida o conteudo do body
     if (!activityID) {
@@ -69,19 +50,6 @@ class ActivityController {
 
     res.status(200).json({ deployURL: `https://api-aps-jade.vercel.app/activity/${activityID}/${inveniraStdID}` });
   }
-
-  async GetActivityPage(req, res) {
-    const { activityID, inveniraStdID } = req.params;
-    if (!activityID) {
-      return res.status(400).json({ message: "Invalid activity ID." });
-    }
-    if (!inveniraStdID) {
-      return res.status(400).json({ message: "Invalid student ID." });
-    }
-
-    let indexPath = path.join(__dirname, "../Views/activity_page.html");
-    return res.sendFile(indexPath);
-  }
 }
 
-module.exports = new ActivityController();
+module.exports = new Activity();

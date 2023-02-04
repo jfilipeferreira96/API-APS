@@ -2,7 +2,7 @@ const Logger = require("../utils/logger");
 
 //Neste documento encontra-se o Design Pattern: Proxy
 
-class AnalyticsController {
+class Analytics {
   //4. Analytics de atividade
   //devolve analytics_url
   async GetActivityAnalytics(req, res) {
@@ -46,7 +46,7 @@ class AnalyticsController {
 
 class AnalyticsProxy {
   constructor() {
-    this.OriginalAnalyticsController = OriginalAnalyticsController;
+    this.OriginalAnalytics = OriginalAnalytics;
     this.cacheSuccessFetchs = 0;
     this.previousAnalytics = [];
 
@@ -70,7 +70,7 @@ class AnalyticsProxy {
     //se a analitica da Atividade não estiver em cache, então procuramos na DB
     Logger.info("Fetching the DB for the Ativity Analytics");
 
-    const fetchDatabase = await this.OriginalAnalyticsController.GetActivityAnalytics(req, res);
+    const fetchDatabase = await this.OriginalAnalytics.GetActivityAnalytics(req, res);
     if (fetchDatabase.status !== "Success") {
       return res.status(400);
     }
@@ -84,8 +84,27 @@ class AnalyticsProxy {
     this.cacheSuccessFetchs++;
     Logger.proxy(`Number of successful fetchs to the database: ${this.cacheSuccessFetchs}`);
   }
+
+  //2. Lista de analytics da atividade
+  // analytics_list_url: URL para um Web service que devolve a lista de analytics que o Activity Provider recolherá
+  async GetAnalytics(req, res) {
+    const sendTestAnalytics = [
+      {
+        name: "inveniraStdID",
+        type: "integer",
+        analytics: [
+          { name: "numOfResets", type: "integer" },
+          { name: "numOfSubmits", type: "integer" },
+          { name: "wasInformationClicked", type: "boolean" },
+          { name: "answer", type: "array" },
+        ],
+      },
+    ];
+
+    return res.status(200).json(sendTestAnalytics);
+  }
 }
 
-const OriginalAnalyticsController = new AnalyticsController();
+const OriginalAnalytics = new Analytics();
 
-module.exports = new AnalyticsProxy(OriginalAnalyticsController);
+module.exports = new AnalyticsProxy(OriginalAnalytics);

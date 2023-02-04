@@ -1,7 +1,7 @@
 const DB = require("../config/database");
 const { Subject, ConsoleObserver, InsertStudentObserver } = require("./Observer");
 
-class StudentActionsController {
+class StudentActions {
   async ActivityPageParams(req, res) {
     const { activityID, inveniraStdID } = req.params;
     let response = { status: "Failed" };
@@ -66,4 +66,4 @@ class StudentActionsController {
   }
 }
 
-module.exports = new StudentActionsController();
+module.exports = new StudentActions();

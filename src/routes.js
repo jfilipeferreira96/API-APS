@@ -10,25 +10,20 @@ routes.get("/", (req, res) => {
 
 //1. Página de configuração de uma atividade
 //config_url: URL da página do Activity Provider que permite configurar a atividade;
-routes.get("/activity_config.html", (req, res) => {
-  // Esta página não guarda nada no Activity Provider: é apenas usado pela Inven!RA, que o usa para apresentar a página de configuração ao utilizador.
-  res.sendFile("Views/config_page.html", { root: __dirname });
-});
+// Esta página não guarda nada no Activity Provider: é apenas usado pela Inven!RA, que o usa para apresentar a página de configuração ao utilizador.
+routes.get("/activity_config.html", Activity.ActivityConfig);
 
 //1.
 routes.get("/json_params_url", Activity.SendParams);
 
 //2
-routes.get("/analytics_list", Activity.GetAnalytics);
+routes.get("/analytics_list", Analytics.GetAnalytics);
 
 //3.1
 routes.get("/deploy_activity/:activityID?", Activity.DeployActivityGet);
 
 //3.2
 routes.post("/activity/:activityID", Activity.DeployActivityPost);
-
-//acede à pagina
-routes.get("/activity/:activityID?/:inveniraStdID?", Activity.GetActivityPage);
 
 //4
 routes.post("/analytics", Analytics.FetchAnalytics);
