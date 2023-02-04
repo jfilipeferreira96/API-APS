@@ -94,7 +94,11 @@ export default function Activity() {
         }),
       });
       const data = await response.json();
-      console.log(data);
+
+      if (data.message === "Success") {
+        alert("Success! Your anwser is correct!");
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -106,8 +110,6 @@ export default function Activity() {
     if (params.correctAnswer === analytics.answer.trim().toLocaleLowerCase()) {
       //chama post
       postAnalytics(activityID, inveniraStdID);
-      alert("Success! Your anwser is correct!");
-      navigate("/");
     } else {
       alert("Incorrect anwser, please try again.");
     }

@@ -14,7 +14,7 @@ class StudentActions {
     }
 
     //extra validaçao para verificar se este aluno já fez a atividade!
-    const checkStudent = await DB.Query(`SELECT * FROM student_analytics WHERE activityID = ${activityID} AND stdID = ${inveniraStdID}`);
+    const checkStudent = await DB.Query(`SELECT * FROM student_analytics WHERE activityID = ${DB.Escape(activityID)} AND stdID = ${DB.Escape(inveniraStdID)}`);
     if (checkStudent.length > 0) {
       const id = checkStudent[0].id;
       const numOfSubmits = checkStudent[0].numOfSubmits;
@@ -27,7 +27,7 @@ class StudentActions {
       }
     }
 
-    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${activityID}`);
+    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${DB.Escape(activityID)}`);
     if (params.length > 0) {
       response = { status: "Success", params: params };
 
@@ -50,8 +50,7 @@ class StudentActions {
 
   async SaveAnalytics(req, res) {
     const { activityID, inveniraStdID } = req.params;
-    const { analytics } = req.body;
-    let response = { status: "Failed" };
+    const { analytics } = DB.EscapeObjects(req.body);
 
     if (!activityID) {
       return res.status(400).json({ message: "Invalid activity ID." });
@@ -59,10 +58,11 @@ class StudentActions {
     if (!inveniraStdID) {
       return res.status(400).json({ message: "Invalid student ID." });
     }
+    if (analytics.answer === undefined || analytics.answer.length === 0) {
+      return res.status(400).json({ message: "Response is empty" });
+    }
 
-    console.log(analytics);
-
-    return res.json({ message: "tudo ok" });
+    return res.json({ message: "Success" });
   }
 }
 
