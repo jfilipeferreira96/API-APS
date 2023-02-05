@@ -39,7 +39,7 @@ export default function Activity() {
       let url = "";
 
       if (process.env.NODE_ENV === "production") {
-        url = `https://api-aps.herokuapp.com/params/${activityID}/${inveniraStdID}`;
+        url = `https://api-aps.onrender.com/params/${activityID}/${inveniraStdID}`;
       } else {
         url = `http://localhost:5000/params/${activityID}/${inveniraStdID}`;
       }
