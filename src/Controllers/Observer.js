@@ -54,7 +54,7 @@ class InsertStudentObserver {
     //insere uma row na tabela xxx com o numero de aluno, atividade e a data de entrada now()
     try {
       const query = `INSERT INTO student_analytics (stdID, activityID, inTimestamp) 
-                    VALUES (${model.inveniraStdID}, ${model.activityID}, '${moment().format("YYYY-MM-DD HH:mm:ss")}')`;
+                    VALUES (${DB.Escape(model.inveniraStdID)}, ${DB.Escape(model.activityID)}, '${moment().format("YYYY-MM-DD HH:mm:ss")}')`;
       const result = await DB.Query(query);
 
       if (result) {

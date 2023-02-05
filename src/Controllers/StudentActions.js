@@ -1,7 +1,7 @@
 const DB = require("../config/database");
 const { Subject, ConsoleObserver, InsertStudentObserver } = require("./Observer");
 
-class ActionsController {
+class StudentActions {
   async ActivityPageParams(req, res) {
     const { activityID, inveniraStdID } = req.params;
     let response = { status: "Failed" };
@@ -14,7 +14,7 @@ class ActionsController {
     }
 
     //extra validaçao para verificar se este aluno já fez a atividade!
-    const checkStudent = await DB.Query(`SELECT * FROM student_analytics WHERE activityID = ${activityID} AND stdID = ${inveniraStdID}`);
+    const checkStudent = await DB.Query(`SELECT * FROM student_analytics WHERE activityID = ${DB.Escape(activityID)} AND stdID = ${DB.Escape(inveniraStdID)}`);
     if (checkStudent.length > 0) {
       const id = checkStudent[0].id;
       const numOfSubmits = checkStudent[0].numOfSubmits;
@@ -27,7 +27,7 @@ class ActionsController {
       }
     }
 
-    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${activityID}`);
+    const params = await DB.Query(`SELECT * FROM page_params WHERE activityID = ${DB.Escape(activityID)}`);
     if (params.length > 0) {
       response = { status: "Success", params: params };
 
@@ -50,8 +50,7 @@ class ActionsController {
 
   async SaveAnalytics(req, res) {
     const { activityID, inveniraStdID } = req.params;
-    const { analytics } = req.body;
-    let response = { status: "Failed" };
+    const { analytics } = DB.EscapeObjects(req.body);
 
     if (!activityID) {
       return res.status(400).json({ message: "Invalid activity ID." });
@@ -59,11 +58,12 @@ class ActionsController {
     if (!inveniraStdID) {
       return res.status(400).json({ message: "Invalid student ID." });
     }
+    if (analytics.answer === undefined || analytics.answer.length === 0) {
+      return res.status(400).json({ message: "Response is empty" });
+    }
 
-    console.log(analytics);
-
-    return res.json({ message: "tudo ok" });
+    return res.json({ message: "Success" });
   }
 }
 
-module.exports = new ActionsController();
+module.exports = new StudentActions();
